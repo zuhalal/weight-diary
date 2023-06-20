@@ -38,6 +38,9 @@
                         <td class="d-flex justify-content-center gap-2">
                             <a class="btn btn-primary" th:href="@{/detail/} + ${weight.id}">Detail</a>
                             <a class="btn btn-primary" th:href="@{/update/} + ${weight.id}">Ubah</a>
+                            <form method="post" th:action="@{/delete/} + ${weight.id}">
+                                <button class="btn btn-danger" type="submit" name="delete">Hapus</button>
+                            </form>
                         </td>
                     </tr>
                     <tr class="fw-bold">

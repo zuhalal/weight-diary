@@ -10,9 +10,9 @@
 <div class="container">
     <div class="card m-4 p-4">
         <div class="card-body">
-            <div class="justify-content-center">
+            <div class="justify-content-center gap-2">
                 <h2 th:text="${isEdit} == false ? 'Tambah Berat Badan' : 'Ubah Berat Badan'"></h2>
-                <br>
+                <div class="alert alert-danger" role="alert" th:text="${error}" th:if="${error}"><br></div>
                 <form th:action="${isEdit} == false ? @{/add} : @{/update/} + ${weight.id}"
                       th:object="${weight}" method="POST" class="d-flex flex-column gap-3">
 

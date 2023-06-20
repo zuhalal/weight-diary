@@ -28,7 +28,7 @@ public class WeightController {
         Long sumMinAverage = 0L;
         Long sumDiffAverage = 0L;
 
-        for(int i=0; i < listWeight.size(); i++){
+        for (int i = 0; i < listWeight.size(); i++) {
             sumMaxAverage += listWeight.get(i).getMax();
             sumMinAverage += listWeight.get(i).getMin();
             sumDiffAverage += (listWeight.get(i).getMax() - listWeight.get(i).getMin());
@@ -67,8 +67,22 @@ public class WeightController {
         weight.setMax(weightModel.getMax());
         weight.setDate(weightModel.getDate());
 
+        if (weightModel.getMin() > weightModel.getMax()) {
+            redirectAttrs.addFlashAttribute("error", "Berat minimal tidak boleh melebihi berat maksimal");
+            return "redirect:/update/" + id;
+        }
+
         weightService.updateWeight(weight);
         redirectAttrs.addFlashAttribute("success", "Berat Badan berhasil diubah");
+        return "redirect:/";
+    }
+
+    @PostMapping(value = "/delete/{id}", params = {"delete"})
+    public String deleteWeight(@ModelAttribute WeightModel weightModel, @PathVariable String id, RedirectAttributes redirectAttrs) {
+        WeightModel weight = weightService.getWeight(Long.parseLong(id));
+
+        weightService.deleteWeight(weight);
+        redirectAttrs.addFlashAttribute("success", "Berat Badan berhasil dihapus");
         return "redirect:/";
     }
 
@@ -84,6 +98,11 @@ public class WeightController {
     @PostMapping(value = "/add", params = {"save"})
     public String addWeightSubmitPage(@ModelAttribute WeightModel weightModel, RedirectAttributes redirectAttrs) {
         weightModel.setCreatedAt(LocalDateTime.now());
+
+        if (weightModel.getMin() > weightModel.getMax()) {
+            redirectAttrs.addFlashAttribute("error", "Berat minimal tidak boleh melebihi berat maksimal");
+            return "redirect:/add";
+        }
 
         weightService.createWeight(weightModel);
         redirectAttrs.addFlashAttribute("success", "Berat Badan berhasil dibuat");
