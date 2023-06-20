@@ -24,8 +24,30 @@ public class WeightController {
     public String listObat(Model model) {
         List<WeightModel> listWeight = weightService.getAllWeight();
 
+        Long sumMaxAverage = 0L;
+        Long sumMinAverage = 0L;
+        Long sumDiffAverage = 0L;
+
+        for(int i=0; i < listWeight.size(); i++){
+            sumMaxAverage += listWeight.get(i).getMax();
+            sumMinAverage += listWeight.get(i).getMin();
+            sumDiffAverage += (listWeight.get(i).getMax() - listWeight.get(i).getMin());
+        }
+
         model.addAttribute("listWeight", listWeight);
+        model.addAttribute("averageMax", sumMaxAverage / listWeight.size());
+        model.addAttribute("averageMin", sumMinAverage / listWeight.size());
+        model.addAttribute("averageDiff", sumDiffAverage / listWeight.size());
+
         return "home";
+    }
+
+    @GetMapping("/detail/{id}")
+    public String detailWeightPage(@PathVariable String id, Model model) {
+        WeightModel weight = weightService.getWeight(Long.parseLong(id));
+        model.addAttribute("weight", weight);
+
+        return "detail-weight";
     }
 
     @GetMapping("/update/{id}")

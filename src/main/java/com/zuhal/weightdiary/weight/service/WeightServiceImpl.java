@@ -17,7 +17,7 @@ public class WeightServiceImpl implements WeightService {
 
     @Override
     public List<WeightModel> getAllWeight() {
-        return weightDb.findAll();
+        return weightDb.findAllOrderByDate();
     }
 
     @Override

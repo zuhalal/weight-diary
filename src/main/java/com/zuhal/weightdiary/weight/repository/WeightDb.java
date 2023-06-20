@@ -11,5 +11,5 @@ import java.util.List;
 @Repository
 public interface WeightDb extends JpaRepository<WeightModel, Long> {
     @Query("SELECT w FROM WeightModel w ORDER BY w.date DESC ")
-    List<WeightModel> findAll();
+    List<WeightModel> findAllOrderByDate();
 }

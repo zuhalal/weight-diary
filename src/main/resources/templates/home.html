@@ -19,25 +19,33 @@
                 <div class="d-flex" style="gap: 12px;">
                     <a class="btn btn-primary" href="/add">Tambah Berat Badan</a>
                 </div>
-                <table class="w-100 table" id="example" th:if="${listWeight.size() > 0}">
+                <table class="w-100 table table-striped" id="weightTable" th:if="${listWeight.size() > 0}">
                     <thead>
-                        <tr>
-                            <th scope="col" class="text-center">Tanggal</th>
-                            <th scope="col" class="text-center">Max</th>
-                            <th scope="col" class="text-center">Min</th>
-                            <th scope="col" class="text-center">Perbedaan</th>
-                            <th scope="col" class="text-center">Aksi</th>
-                        </tr>
+                    <tr>
+                        <th scope="col" class="text-center">Tanggal</th>
+                        <th scope="col" class="text-center">Max</th>
+                        <th scope="col" class="text-center">Min</th>
+                        <th scope="col" class="text-center">Perbedaan</th>
+                        <th scope="col" class="text-center">Aksi</th>
+                    </tr>
                     </thead>
-                    <tbody>
+                    <tbody class="text-center">
                     <tr th:each="weight, iterationStatus: ${listWeight}">
-                        <td th:text="${weight.date}" class="text-center"></td>
-                        <td th:text="${weight.max}" class="text-center"></td>
-                        <td th:text="${weight.min}" class="text-center"></td>
-                        <td th:text="${weight.max - weight.min}" class="text-center" ></td>
-                        <td class="d-flex justify-content-center">
-                            <a class="btn btn-primary" th:href="@{/update/} + ${weight.id}">Ubah Berat Badan</a>
+                        <td th:text="${weight.date}" ></td>
+                        <td th:text="${weight.max}"></td>
+                        <td th:text="${weight.min}" ></td>
+                        <td th:text="${weight.max - weight.min}"></td>
+                        <td class="d-flex justify-content-center gap-2">
+                            <a class="btn btn-primary" th:href="@{/detail/} + ${weight.id}">Detail</a>
+                            <a class="btn btn-primary" th:href="@{/update/} + ${weight.id}">Ubah</a>
                         </td>
+                    </tr>
+                    <tr class="fw-bold">
+                        <td>Rata-rata</td>
+                        <td th:text="${averageMin}"></td>
+                        <td th:text="${averageMax}"></td>
+                        <td th:text="${averageDiff}"></td>
+                        <td></td>
                     </tr>
                     </tbody>
                 </table>
@@ -48,10 +56,14 @@
         </div>
     </div>
 </div>
-<script>
-    $(document).ready(function () {
-        $('#example').DataTable();
-    });
+<script th:inline="none">
+    // $(document).ready(function () {
+    //     $("#weightTable").DataTable({
+    //         "order": [
+    //             [0, "desc"]
+    //         ],
+    //     });
+    // });
 </script>
 </body>
 </html>

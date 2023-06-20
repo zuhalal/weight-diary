@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://thymeleaf.org">
+<head>
+  <title>Detail Berat Badan</title>
+  <object th:include="fragments/fragment :: css" th:remove="tag"></object>
+</head>
+<body>
+<header th:insert="fragments/fragment.html :: navbar('resep')"></header>
+<main class="container">
+  <section class="d-flex flex-column min-vh-100 p-4" style="gap: 24px;">
+    <h2 class="fw-bold display-6">Detail Berat Badan</h2>
+    <div class="d-flex" style="gap: 8px;">
+      <a href="/" class="btn btn-primary">Beranda</a>
+    </div>
+    <section class="d-flex flex-column" th:object="${weight}" th:unless="${error == 'Resep tidak ditemukan'}">
+      <p th:text="'ID Berat Badan ' + *{id}"></p>
+      <p th:text="'Tanggal Berat: ' + *{date}"></p>
+      <p th:text="'Min: ' + *{min}"></p>
+      <p th:text="'Max: ' + *{max}"></p>
+      <p th:text="'Perbedaan: ' + *{max - min}"></p>
+      <div>
+    </section>
+  </section>
+</main>
+<object th:include="fragments/fragment :: js" th:remove="tag"></object>
+</body>
+</html>
+
