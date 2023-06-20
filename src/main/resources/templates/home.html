@@ -17,7 +17,7 @@
                 <div class="alert alert-success" role="alert" th:text="${success}" th:if="${success}"><br></div>
                 <div class="alert alert-danger" role="alert" th:text="${error}" th:if="${error}"><br></div>
                 <div class="d-flex" style="gap: 12px;">
-                    <a class="btn btn-primary" href="/create">Tambah Berat Badan</a>
+                    <a class="btn btn-primary" href="/add">Tambah Berat Badan</a>
                 </div>
                 <table class="w-100 table" id="example" th:if="${listWeight.size() > 0}">
                     <thead>
@@ -36,7 +36,7 @@
                         <td th:text="${weight.min}" class="text-center"></td>
                         <td th:text="${weight.max - weight.min}" class="text-center" ></td>
                         <td class="d-flex justify-content-center">
-                            <a class="btn btn-primary" th:href="@{/obat/update/} + ${weight.id}">Ubah Berat Badan</a>
+                            <a class="btn btn-primary" th:href="@{/update/} + ${weight.id}">Ubah Berat Badan</a>
                         </td>
                     </tr>
                     </tbody>
