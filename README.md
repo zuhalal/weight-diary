@@ -10,6 +10,7 @@ For building and running the application you need:
 
 - Java 11
 - Gradle 7.6
+- MySQL 
 
 ## Steps to Build & Run
 - open your command prompt, then:
@@ -20,3 +21,6 @@ gradle bootRun
 ./gradlew bootRun
 ```
 - Or, use IntelliJ to build and run using play button
+
+## Additional Notes
+- If there's an error relating to create the database, please create the database named `weight_diary`
